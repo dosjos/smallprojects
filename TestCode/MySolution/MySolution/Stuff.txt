@@ -1,0 +1,367 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Diagnostics;
+
+namespace ConsoleApplication1
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+			Demo1();
+			Demo2();
+
+
+			Console.WriteLine("\nPress ENTER...");
+			Console.ReadLine();
+        }
+
+		private static void Demo2()
+		{
+			StringBuilder sb = new StringBuilder();
+
+			Stopwatch sw = Stopwatch.StartNew();
+			for (int i = 0; i < 200000; i++)
+			{
+				sb.Append(".");
+			}
+
+			string s = sb.ToString();
+			Console.WriteLine(sw.Elapsed);
+
+		}
+
+		private static void Demo1()
+		{
+			string s = "";
+
+			Stopwatch sw = Stopwatch.StartNew();
+			for (int i = 0; i < 200000; i++)
+			{
+				s += ".";
+			}
+
+			Console.WriteLine(sw.Elapsed);
+		}
+    }
+}
+------------------------------------------------------------------------------------
+using System;
+using System.Collections.Generic;
+//using System.Linq;
+using System.Text;
+using System.Diagnostics;
+
+namespace ConsoleApplication1
+{
+	class Program
+	{
+		static void Main(string[] args)
+		{
+			int bortover, nedover;
+			if (args.Length != 2
+				|| !int.TryParse(args[0], out bortover)
+				|| !int.TryParse(args[1], out nedover))
+			{
+				Console.WriteLine("En feil har oppstått!");
+
+				Console.WriteLine("\nPress ENTER...");
+				Console.ReadLine();
+				return;
+			}
+
+
+			
+			
+			Console.WriteLine("Multiplication table: {0} x {1}\n", bortover, nedover);
+
+			for (int y = 1; y <= nedover; y++)
+			{
+				for (int x = 1; x <= bortover; x++)
+				{
+					Console.Write(" {0,3} |", x * y);
+				}
+				Console.WriteLine();
+
+				if (y == 1)
+				{
+					for (int x = 0; x < bortover; x++)
+					{
+						Console.Write("-----+"); 
+					}
+
+					Console.WriteLine();
+				}
+			}
+
+
+			Console.WriteLine("\nPress ENTER...");
+			Console.ReadLine();
+		}
+	}
+}
+------------------------------------------------------------------------------------
+Person p = new Person("petter", "olsen", 1950);
+Console.WriteLine("{0:fn}", p);
+Console.WriteLine("{0:ln}", p);
+Console.WriteLine("{0:full}", p);
+Console.WriteLine("{0:age}", p);
+
+Console.WriteLine("{0:full} er født i {0:birthyear} og er dermed {0:age} år gammel", p);
+------------------------------------------------------------------------------------
+using (StreamWriter sw = new StreamWriter(@"c:\demo\test.txt"))
+{
+	sw.WriteLine("hello world");
+}
+
+
+//StreamWriter sw = null;
+//try
+//{
+//    sw = new StreamWriter(@"c:\demo\test.txt");
+
+//    sw.WriteLine("hello world");
+//}
+//finally
+//{
+//    if (sw != null)
+//    {
+//        sw.Dispose();
+//    }
+//}
+------------------------------------------------------------------------------------
+using System;
+using System.Collections.Generic;
+//using System.Linq;
+using System.Text;
+using System.Diagnostics;
+
+namespace ConsoleApplication1
+{
+	class Program
+	{
+		static void Main(string[] args)
+		{
+			MathOp op = GetOperation();
+						
+			Repeat(12, op);
+
+
+			Console.WriteLine("\nPress ENTER...");
+			Console.ReadLine();
+		}
+
+		static void Repeat(int reps, MathOp op)
+		{
+			for (int i = 0; i < reps; i++)
+			{
+				op(i, i);
+			}
+		}
+
+		private static MathOp GetOperation()
+		{
+			MathOp op;
+			switch (Console.ReadLine())
+			{
+				case "m":
+					op = new MathOp(Multiply);
+					break;
+				case "a":
+					op = new MathOp(Add);
+					break;
+				case "s":
+					op = new MathOp(Subtract);
+					break;
+				default:
+					op = delegate(int i, int j)
+					{
+						Console.WriteLine("i = {0}, j = {1}", i, j);
+					};
+					break;
+			}
+			return op;
+		}
+
+
+
+		static void Add(int a, int b)
+		{
+			Console.WriteLine("{0} + {1} = {2}", a, b, a + b);
+		}
+
+		static void Subtract(int a, int b)
+		{
+			Console.WriteLine("{0} - {1} = {2}", a, b, a - b);
+		}
+
+		static void Multiply(int x, int y)
+		{
+			Console.WriteLine("{0} * {1} = {2}", x, y, x * y);
+		}
+	}
+}
+------------------------------------------------------------------------------------
+public class Booking : IComparable<Booking>
+{
+	public enum CompareOptions { StartTime = 1, EndTime, Room }
+
+	public class Comparer : IComparer<Booking>
+	{
+		private CompareOptions _options;
+
+		public Comparer(CompareOptions options)
+		{
+			_options = options;
+		}
+
+		public int Compare(Booking x, Booking y)
+		{
+			switch (_options)
+			{
+				case CompareOptions.StartTime:
+					return x.Start.CompareTo(y.Start);
+				case CompareOptions.EndTime:
+					return x.End.CompareTo(y.End);
+				case CompareOptions.Room:
+					return x.Room.CompareTo(x.Room);
+				default:
+					throw new InvalidOperationException("Invalid compare option");
+			}
+		}
+	}
+
+	public DateTime Start { get; private set; }
+	public TimeSpan Duration { get; private set; }
+	public Room Room { get; private set; }
+
+	public DateTime End
+	{
+		get { return Start + Duration; }
+	}
+
+	public Booking(DateTime start, TimeSpan duration, Room room)
+	{
+		Start = start;
+		Duration = duration;
+		Room = room;
+	}
+	public override string ToString()
+	{
+		return string.Format("Start {0}, to {1} - {2}", Start, End, Room);
+	}
+
+	public int CompareTo(Booking other)
+	{
+		int res = this.Start.CompareTo(other.Start);
+		if (res == 0)
+		{
+			res = this.End.CompareTo(other.End);
+			if (res == 0)
+			{
+				res = this.Room.CompareTo(other.Room);
+			}
+		}
+
+		return res;
+	}
+}
+------------------------------------------------------------------------------------
+var list = new List<Person>();
+
+list.Add(new Person("ole", "olsen", 1980));
+list.Add(new Person("løytnant", "bartnes", 1970));
+list.Add(new Person("kari", "eik", 1955));
+list.Add(new Person("nina", "gran", 1978));
+list.Add(new Person("merethe", "nilsen", 1930));
+list.Add(new Person("nils", "pettersen", 1920));
+list.Add(new Person("trond-erik", "olsen", 1910));
+list.Add(new Person("petter", "olsen", 1977));
+
+var q = from p in list
+		where p.BirthYear> 1950
+		group p by p.LastName into g
+		select g;
+
+
+foreach (var item in q)
+{
+	Console.WriteLine(item.Key);
+	foreach (var p in item)
+	{
+		Console.WriteLine("   {0}", p);
+	}
+}
+------------------------------------------------------------------------------------
+static void Main(string[] args)
+{
+	int a = 13;
+
+	Console.WriteLine(MyExtensions.Tripple(a));
+	Console.WriteLine(a.Tripple());
+
+	Console.WriteLine("epmalsdrobevirks".Reverse().Repeat(3));
+
+	Console.WriteLine("-----+".Repeat(8));
+
+
+	Console.WriteLine("\nPress ENTER...");
+	Console.ReadLine();
+}
+------------------------------------------------------------------------------------
+var q = from fullname in Directory.GetFiles(@"c:\windows\system32")
+		let filename = Path.GetFileName(fullname)
+		let fi = new FileInfo(fullname)
+		where filename.StartsWith("s")
+		orderby fi.Length descending
+		select new{ filename, fi.Length};
+
+foreach (var file in q.Take(10))
+{
+	Console.WriteLine("{0,-15} - {1,12:### ### ###}", file.filename, file.Length);
+}
+------------------------------------------------------------------------------------
+var doc = XDocument.Load("http://www.yr.no/sted/Norge/Oppland/Lesja/Lesjaskog~178192/varsel.xml");
+
+var sun = doc.Element("weatherdata").Element("sun");
+		
+			
+var rise = (DateTime)sun.Attribute("rise");
+var set = (DateTime)sun.Attribute("set");
+Console.WriteLine(set-rise);
+
+var tabular = from time in doc.Element("weatherdata").Element("forecast").Element("tabular").Elements("time")
+				//where time.Element("symbol").Attribute("name").Value == "Regn"
+				select time;
+------------------------------------------------------------------------------------
+var doc = new XElement("root",
+	new XElement("person",
+		new XAttribute("navn", "petter pettersen"),
+		new XElement("addresse", "Martin Linges vei 17")
+		),
+	new XElement("person"),
+	new XElement("person")
+	);
+
+Console.WriteLine(doc);
+------------------------------------------------------------------------------------
+using (var db = new ProductDb())
+{
+	var doc = new XElement("root", from cat in db.Categories.Include(c => c.Products).ToList()
+									select new XElement("category", new XAttribute("name", cat.CategoryName),
+										from prod in cat.Products
+										select new XElement("product",
+											new XAttribute("name", prod.ProductName),
+											new XAttribute("price", prod.Price)
+											)
+										));
+
+	Console.WriteLine(doc);
+}
+------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------
