@@ -1,0 +1,81 @@
+﻿IE 9.0,16.45
+Chrome 26.0,12.38
+Chrome 24.0,9.28
+Safari iPad,7.52
+Chrome 25.0,7.35
+IE 8.0,5.88
+Safari 6.0,5.66
+Firefox 19.0,4.35
+Firefox 18.0,4.16
+Firefox 20.0,4.16
+IE 10.0,4.11
+Chrome 23.0,3.15
+Safari 5.1,2.99
+Opera 12.1,2.14
+Chrome 27.0,1.53
+Firefox 17.0,1.36
+Firefox 21.0,0.97
+Android 0,0.77
+Safari 5.0,0.73
+Chrome iPad,0.41
+Firefox 16.0,0.4
+IE 7.0,0.4
+Opera 12.0,0.29
+Firefox 10.0,0.26
+Firefox 3.6,0.25
+Chrome 21.0,0.22
+Firefox 12.0,0.22
+Firefox 15.0,0.2
+Firefox 14.0,0.2
+Chrome for Andr,0.19
+Mozilla 1.9,0.16
+RockMelt 0.16,0.11
+Firefox 13.0,0.11
+Chrome 22.0,0.09
+Chrome 10.0,0.08
+Firefox 11.0,0.08
+Safari 4.1,0.07
+Safari 4.0,0.07
+Sony PS3 0,0.06
+Chrome 17.0,0.06
+Chrome 18.0,0.06
+Maxthon 3.0,0.05
+Chrome 11.0,0.05
+Opera 11.6,0.05
+Firefox 9.0,0.04
+Chrome 19.0,0.04
+Firefox 8.0,0.04
+Chromium 25.0,0.04
+Firefox 4.0,0.03
+Firefox 5.0,0.03
+Chrome 28.0,0.03
+Chrome 12.0,0.03
+Firefox 22.0,0.03
+Maxthon 4.0,0.03
+360 Safe Browser 0,0.03
+Firefox 6.0,0.03
+Chrome 16.0,0.03
+Pale Moon 19.0,0.02
+Firefox 7.0,0.02
+Chrome 15.0,0.02
+IE 6.0,0.02
+Firefox 3.0,0.02
+Chrome 20.0,0.02
+Firefox 3.5,0.02
+Chrome 13.0,0.02
+AppleWebKit 0,0.02
+IE 0,0.02
+Opera 0,0.01
+Opera 11.5,0.01
+Firefox 2.0,0.01
+Pale Moon 15.4,0.01
+Chrome 14.0,0.01
+Chromium 24.0,0.01
+Firefox 23.0,0.01
+Chromium 18.0,0.01
+Pale Moon 20.0,0.01
+Pale Moon 15.3,0.01
+Chromium 23.0,0.01
+Opera 11.0,0.01
+Sogou Explorer 0,0.01
+Chromium 20.0,0.01
